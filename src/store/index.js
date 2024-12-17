@@ -32,6 +32,9 @@ export default createStore({
     },
     addCart(state, id) {
       state.cart.push(id);
+    },
+    addOldGoods(state, oldGoods) {
+      state.cart = oldGoods;
     }
   },
   actions: {

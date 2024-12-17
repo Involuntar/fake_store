@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
     data() {
@@ -26,22 +26,23 @@ export default {
         goodinfo: Object
     },
     methods: {
-        ...mapMutations(['selectGood']),
+        ...mapMutations(['selectGood', 'addCart', 'addOldGoods']),
         addToCart(id) {
-            this.cartGoods.push(id);
-            localStorage.cart = JSON.stringify(this.cartGoods);
+            this.addCart(id);
+            localStorage.cart = JSON.stringify(this.getCart);
         },
     },
     computed: {
+        ...mapGetters(['getCart']),
         goodsFromLocalStorage() {
             return JSON.parse(localStorage.getItem('cart') || '[]');
         }
     },
     mounted() {
-        this.cartGoods = this.goodsFromLocalStorage;
+        this.addOldGoods(this.goodsFromLocalStorage);
     },
     watch: {
-        cartGoods(newGood) {
+        getCart(newGood) {
             localStorage.setItem('cart', JSON.stringify(newGood))
         }
     }

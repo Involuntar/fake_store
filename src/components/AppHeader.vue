@@ -7,13 +7,13 @@
                 <button @click="fetchAllGoods" class="filters__button">All</button>
                 <button @click="fetchCategoryGoods(cat)" class="filters__button" v-for="(cat, key) in categories" :key="key">{{ cat }}</button>
             </nav>
-            <RouterLink to="/cart" class="header__cart"><img src="shopping-cart-outline-svgrepo-com.svg" alt="cart" class="cart__img">{{ cartAmount }}</RouterLink>
+            <RouterLink to="/cart" class="header__cart"><img src="shopping-cart-outline-svgrepo-com.svg" alt="cart" class="cart__img">{{ getCart.length }}</RouterLink>
         </div>
     </header>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
     data() {
@@ -25,13 +25,15 @@ export default {
         this.$http.get('https://fakestoreapi.com/products/categories', {
             timeout: 60000
         })
-        .then(resp => { this.categories = resp.data;})
+        .then(resp => { this.categories = resp.data;});
+        this.getCart = this.goodsFromLocalStorage;
     },
     methods: {
         ...mapMutations(['fetchCategoryGoods', 'fetchAllGoods'])
     },
     computed: {
-        cartAmount() {
+        ...mapGetters(['getCart']),
+        goodsFromLocalStorage() {
             return JSON.parse(localStorage.getItem('cart') || '[]');
         }
     }
