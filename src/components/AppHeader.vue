@@ -83,6 +83,8 @@ export default {
 .header__cart {
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: #000;
     gap: 8px;
 }
 

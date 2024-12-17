@@ -37,7 +37,6 @@ export default {
         ...mapMutations(['addOldGoods']),
         getCartGoods() {
             for (let i of this.cartGoodsStorage) {
-                console.log(i);
                 this.$http.get(`https://fakestoreapi.com/products/${i}`)
                 .then(resp => {
                     this.cartGoods.push(resp.data);
