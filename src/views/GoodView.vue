@@ -15,7 +15,7 @@
                 <div class="good_additional_info">
                     <p class="good_info_rate good__rating">Rating: {{ '⭐'.repeat(Math.round(goodinfo.rating.rate)) }} {{ goodinfo.rating.rate }}</p>
                     <p class="good_info_count good__rating">👤: {{ goodinfo.rating.count }}</p>
-                    <button class="good__cart button">В корзину</button>
+                    <button class="good__cart button" @click="addToCart(goodinfo.id)">В корзину</button>
                 </div>
             </div>
         </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
+
 
 export default {
     mounted() {
@@ -31,10 +33,24 @@ export default {
                 this.goodinfo = resp.data;
                 console.log(this.goodinfo)
             });
+        this.addOldGoods(this.goodsFromLocalStorage);
     },
     data() {
         return {
             goodinfo: null
+        }
+    },
+    methods: {
+        ...mapMutations(['addOldGoods', 'addCart']),
+        addToCart(id) {
+            this.addCart(id);
+            localStorage.cart = JSON.stringify(this.getCart);
+        },
+    },
+    computed: {
+        ...mapGetters(['getCart']),
+        goodsFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('cart') || '[]');
         }
     }
 }

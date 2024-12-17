@@ -41,11 +41,6 @@ export default {
     mounted() {
         this.addOldGoods(this.goodsFromLocalStorage);
     },
-    watch: {
-        getCart(newGood) {
-            localStorage.setItem('cart', JSON.stringify(newGood))
-        }
-    }
 }
 </script>
 
