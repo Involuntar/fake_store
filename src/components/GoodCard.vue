@@ -8,7 +8,7 @@
         </div>
         <div class="card__control">
             <button class="control__cart button" @click="addToCart(goodinfo.id)">В корзину</button>
-            <RouterLink class="control__cart a" :to="'/good'+goodinfo.id" @click="selectGood(goodinfo.id)">Подробнее</RouterLink>
+            <RouterLink class="control__cart a" :to="'/good'+goodinfo.id">Подробнее</RouterLink>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ export default {
         goodinfo: Object
     },
     methods: {
-        ...mapMutations(['selectGood', 'addCart', 'addOldGoods']),
+        ...mapMutations(['addCart', 'addOldGoods']),
         addToCart(id) {
             this.addCart(id);
             localStorage.cart = JSON.stringify(this.getCart);

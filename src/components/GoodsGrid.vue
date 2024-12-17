@@ -23,12 +23,16 @@ export default {
     },
     mounted() {
         this.fetchAllGoods();
+        this.addOldGoods(this.goodsFromLocalStorage);
     },
     methods: {
-        ...mapMutations(['fetchAllGoods'])
+        ...mapMutations(['fetchAllGoods', 'addOldGoods'])
     },
     computed: {
-        ...mapGetters(['getGoods'])
+        ...mapGetters(['getGoods']),
+        goodsFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('cart') || '[]');
+        }
     },
     data() {
         return {

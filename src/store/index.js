@@ -27,9 +27,6 @@ export default createStore({
         state.goods = resp.data;
       });
     },
-    selectGood(state, id) {
-      state.selectedGood = id;
-    },
     addCart(state, id) {
       state.cart.push(id);
     },
