@@ -7,8 +7,8 @@
             <p class="desc__rating desc__text">Rating: {{ '⭐'.repeat(Math.round(goodinfo.rating.rate)) }} {{ goodinfo.rating.rate }}</p>
         </div>
         <div class="card__control">
-            <button class="control__cart button" @click="addToCart(goodinfo.id)">В корзину</button>
-            <RouterLink class="control__cart a" :to="'/good'+goodinfo.id">Подробнее</RouterLink>
+            <button class="control__cart button" @click="addToCart(goodinfo.id)">Add to cart</button>
+            <RouterLink class="control__cart a" :to="'/good'+goodinfo.id">Learn more</RouterLink>
         </div>
     </div>
 </template>

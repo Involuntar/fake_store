@@ -1,7 +1,7 @@
 <template>
     <div class="good__view">
         <p v-if="!goodinfo">
-            Загрузка...
+            Loading...
         </p>
         <div v-else class="good__expanded">
             <div class="good__picture container">
@@ -15,7 +15,7 @@
                 <div class="good_additional_info">
                     <p class="good_info_rate good__rating">Rating: {{ '⭐'.repeat(Math.round(goodinfo.rating.rate)) }} {{ goodinfo.rating.rate }}</p>
                     <p class="good_info_count good__rating">👤: {{ goodinfo.rating.count }}</p>
-                    <button class="good__cart button" @click="addToCart(goodinfo.id)">В корзину</button>
+                    <button class="good__cart button" @click="addToCart(goodinfo.id)">Add to cart</button>
                 </div>
             </div>
         </div>

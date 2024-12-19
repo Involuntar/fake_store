@@ -1,7 +1,7 @@
 <template>
     <div class="catalog">
         <p v-if="!getGoods" class="goods_grid_load loader">
-            Загрузка...
+            Loading...
         </p>
         <div v-else class="goods__grid">
             <GoodCard v-for="(good, key) in getGoods.slice(startSlice, startSlice + 10)" :key="key" :goodinfo="good" />

@@ -1,7 +1,8 @@
 <template>
     <div class="cart__view">
+        <h1 class="cart_view_header">Cart</h1>
         <p v-if="cartGoods.length == 0">
-            Загрузка...
+            Loading...
         </p>
         <div v-else class="cart__grid">
             <div class="good__card" v-for="(goodinfo, key) in cartGoods.slice(startSlice, startSlice + 10)" :key="key">
@@ -13,7 +14,8 @@
                         {{ goodinfo.rating.rate }}</p>
                 </div>
                 <div class="card__control">
-                    <RouterLink class="control__cart a" :to="'/good' + goodinfo.id">Подробнее</RouterLink>
+                    <RouterLink class="control__cart a" :to="'/good' + goodinfo.id">Learn more</RouterLink>
+                    <button class="control__cart good_delete button">Delete</button>
                 </div>
             </div>
         </div>
@@ -42,9 +44,9 @@ export default {
     },
     methods: {
         ...mapMutations(['addOldGoods']),
-        getCartGoods() {
+        async getCartGoods() {
             for (let i of this.cartGoodsStorage) {
-                this.$http.get(`https://fakestoreapi.com/products/${i}`)
+                await this.$http.get(`https://fakestoreapi.com/products/${i}`)
                 .then(resp => {
                     this.cartGoods.push(resp.data);
                 });

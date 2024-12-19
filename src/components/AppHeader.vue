@@ -2,7 +2,7 @@
     <header class="app__header">
         <div class="header">
             <h1 class="header__header"><RouterLink to="/" class="main_page_link">Storik</RouterLink></h1>
-            <p v-if="!categories">Загрузка...</p>
+            <p v-if="!categories">Loading...</p>
             <nav v-else class="header__filters">
                 <button @click="fetchAllGoods" class="filters__button">All</button>
                 <button @click="fetchCategoryGoods(cat)" class="filters__button" v-for="(cat, key) in categories" :key="key">{{ cat }}</button>
