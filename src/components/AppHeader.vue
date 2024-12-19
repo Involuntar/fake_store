@@ -36,7 +36,7 @@ export default {
         goodsFromLocalStorage() {
             return JSON.parse(localStorage.getItem('cart') || '[]');
         }
-    }
+    },
 }
 </script>
 

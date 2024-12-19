@@ -30,6 +30,9 @@ export default createStore({
     addCart(state, id) {
       state.cart.push(id);
     },
+    deleteCart(state, id) {
+      state.cart.splice(id, 1);
+    },
     addOldGoods(state, oldGoods) {
       state.cart = oldGoods;
     }

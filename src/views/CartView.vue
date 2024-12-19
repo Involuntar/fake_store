@@ -15,7 +15,7 @@
                 </div>
                 <div class="card__control">
                     <RouterLink class="control__cart a" :to="'/good' + goodinfo.id">Learn more</RouterLink>
-                    <button class="control__cart good_delete button">Delete</button>
+                    <button class="control__cart good_delete button" @click="deleteGood(key)">Delete</button>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@ export default {
         this.addOldGoods(this.goodsFromLocalStorage);
     },
     methods: {
-        ...mapMutations(['addOldGoods']),
+        ...mapMutations(['addOldGoods', 'deleteCart']),
         async getCartGoods() {
             for (let i of this.cartGoodsStorage) {
                 await this.$http.get(`https://fakestoreapi.com/products/${i}`)
@@ -51,13 +51,18 @@ export default {
                     this.cartGoods.push(resp.data);
                 });
             }
+        },
+        deleteGood(id) {
+            this.cartGoods.splice(id, 1);
+            this.cartGoodsStorage.splice(id, 1);
+            localStorage.setItem('cart', JSON.stringify(this.cartGoodsStorage));
         }
     },
     computed: {
         goodsFromLocalStorage() {
             return JSON.parse(localStorage.getItem('cart') || '[]');
         }
-    }
+    },
 }
 </script>
 
